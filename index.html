@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sprint Squad: Misi Rekayasa Perangkat Lunak</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Press+Start+2P&display=swap">
+<style>
+:root{--bg:#0e1020;--bg2:#151834;--bg3:#1e2247;--line:#2c3263;--fg:#eef0ff;--muted:#a3a9d6;--pink:#ff5c8a;--mint:#35e0b4;--sun:#ffc93c;--sky:#5bb8ff;--violet:#a78bfa;--orange:#ff9156;--on:#14102a;--si:#1a1200;--ok:#35e0b4;--bad:#ff7b7b;--g1:rgba(255,92,138,.17);--g2:rgba(91,184,255,.15);--shadow:0 12px 32px rgba(0,0,0,.35);--display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;--body:'DM Sans',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--pixel:'Press Start 2P','Courier New',monospace;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f5f3ff;--bg2:#fff;--bg3:#ebe8fb;--line:#d6d1f0;--fg:#1b1740;--muted:#5b5788;--pink:#e0245e;--mint:#0b9f7b;--sun:#e6a100;--sky:#1f7fd6;--violet:#6d4ee0;--orange:#e0621f;--on:#fff;--ok:#087a5c;--bad:#c9283f;--g1:rgba(224,36,94,.10);--g2:rgba(31,127,214,.10);--shadow:0 10px 26px rgba(60,40,140,.14);color-scheme:light}}
+:root[data-theme="light"]{--bg:#f5f3ff;--bg2:#fff;--bg3:#ebe8fb;--line:#d6d1f0;--fg:#1b1740;--muted:#5b5788;--pink:#e0245e;--mint:#0b9f7b;--sun:#e6a100;--sky:#1f7fd6;--violet:#6d4ee0;--orange:#e0621f;--on:#fff;--ok:#087a5c;--bad:#c9283f;--g1:rgba(224,36,94,.10);--g2:rgba(31,127,214,.10);--shadow:0 10px 26px rgba(60,40,140,.14);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);background-image:radial-gradient(60vw 40vh at 8% -5%,var(--g1),transparent),radial-gradient(50vw 40vh at 100% 0,var(--g2),transparent);background-repeat:no-repeat}
+[v-cloak]{display:none}
+.px{font-family:var(--pixel);line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding:18px 16px 64px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0;font-weight:800}
+h1{font-size:clamp(30px,6vw,52px);letter-spacing:-.02em;margin-top:14px}
+h1 em{font-style:normal;color:var(--pink)}h1 span{color:var(--mint)}
+.brand{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.brand .px{font-size:11px;color:var(--sun)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+@media (max-width:800px){.hero{grid-template-columns:1fr}}
+.lead{color:var(--muted);font-size:17px;max-width:34em}
+.chip{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);background:var(--bg2);border-radius:99px;padding:4px 12px;font-weight:700;font-size:14px}
+.chip.px{font-size:9px;color:var(--mint)}
+.cta,.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.btn{display:inline-flex;gap:8px;align-items:center;text-decoration:none;font:700 15px var(--body);color:var(--fg);background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:10px 16px;cursor:pointer}
+.btn.pri{background:var(--k,var(--pink));color:var(--on);border-color:transparent}
+.btn:hover{filter:brightness(1.12)}.btn:disabled{opacity:.45;cursor:not-allowed}
+:is(button,a):focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.pad{background:#0a0c1b;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;color:#e8ebff;font:13px/1.8 var(--mono)}
+.bar2{display:flex;gap:6px;align-items:center;padding:10px 14px;background:#11142b;color:#5f6699;font-size:12px}
+.bar2 i{width:10px;height:10px;border-radius:50%;background:var(--pink)}.bar2 i:nth-child(2){background:var(--sun)}.bar2 i:nth-child(3){background:var(--mint)}
+.pad pre{margin:0;padding:14px;white-space:pre-wrap;font:inherit}
+.ask{color:#7cc8ff}.ans{color:#4be3bc}.err{color:#ff8a8a}.wrn{color:#ffd466}
+.sec{margin-top:46px}.sec h2{font-size:28px}.sec p{color:var(--muted)}
+.map{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;margin-top:16px}
+.lcard{display:block;text-decoration:none;color:inherit;background:var(--bg2);border:1px solid var(--line);border-top:4px solid var(--k);border-radius:16px;padding:14px;box-shadow:var(--shadow);transition:transform .15s}
+.lcard:hover{transform:translateY(-3px)}
+.tag{font-size:9px;color:var(--k)}
+.lcard h3{font-size:19px;margin:6px 0 2px}.sub{margin:0 0 12px;color:var(--muted);font-size:14px}
+.bar{height:8px;border-radius:9px;background:var(--bg3);overflow:hidden}.bar i{display:block;height:100%;background:var(--k);transition:width .4s}
+.foot{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px}.foot .st{color:var(--k);font-weight:700}
+.scene{width:100%;height:auto;display:block;margin-bottom:10px}
+.s-bg{fill:var(--bg3)}.s-l{fill:none;stroke:var(--fg);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.s-f{fill:var(--bg2)}.s-k{fill:var(--k)}.s-p{fill:var(--pink)}.s-g{fill:var(--mint)}.s-s{fill:var(--sun)}.s-v{fill:var(--sky)}
+.ic{width:1.15em;height:1.15em;flex:none}
+.back{display:inline-flex;gap:6px;align-items:center;color:var(--muted);text-decoration:none;font-weight:700}
+.top{display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:22px;align-items:center;margin:16px 0}
+@media (max-width:700px){.top{grid-template-columns:1fr}}
+.top h2{font-size:32px;margin:8px 0 2px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.tabs button{display:inline-flex;gap:7px;align-items:center;font:700 15px var(--body);color:var(--muted);background:var(--bg2);border:1px solid var(--line);border-radius:99px;padding:8px 16px;cursor:pointer}
+.tabs button.on{background:var(--k);color:var(--on);border-color:transparent}
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.panel h3{font-size:18px;margin-bottom:12px}
+ul.br{padding-left:20px;margin:0}ul.br li{margin:8px 0}
+.msg{display:flex;gap:8px;align-items:flex-start;margin:14px 0 0;padding:10px 14px;border-radius:12px;background:var(--bg3);border-left:4px solid var(--muted);font-weight:600}
+.msg.ok{border-color:var(--ok)}.msg.ok .ic{color:var(--ok)}.msg.bad{border-color:var(--bad)}.msg.bad .ic{color:var(--bad)}
+.sticky{background:var(--bg3);border:1px solid var(--line);border-left:4px solid var(--k);border-radius:12px;padding:14px 16px;font:700 19px var(--display);margin:6px 0 14px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0}
+.opt.ok{background:var(--ok);color:var(--on)}.opt.no{background:var(--bad);color:var(--on)}
+.pc{border:1px solid var(--line);border-radius:12px;padding:8px 14px;background:var(--bg3);color:var(--fg);font:700 15px var(--body);cursor:pointer}
+.pc.used{background:var(--mint);color:var(--on)}.pc.sel{background:var(--sky);color:var(--on)}
+.phone{max-width:230px;margin:10px auto;border:3px solid var(--line);border-radius:26px;padding:16px 12px;min-height:150px;background:var(--bg)}
+.phone div{background:var(--sky);color:var(--on);border-radius:8px;padding:6px 10px;margin:7px 0;font-weight:700;font-size:13px}
+.wr{overflow-x:auto}table{border-collapse:separate;border-spacing:6px;width:100%}th{font-size:13px;text-align:center}td.r{font-weight:800}
+td button{width:100%;min-height:44px;justify-content:center}
+.cell0{background:var(--mint)!important;color:var(--on)}.cell1{background:var(--sun)!important;color:var(--si)}.cell2{background:var(--pink)!important;color:var(--on)}
+textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--bg);color:var(--fg);font:16px var(--body)}
+.breath{width:90px;height:90px;border-radius:50%;background:var(--k);margin:14px auto;animation:br 8s ease-in-out infinite}
+@keyframes br{50%{transform:scale(1.5)}}
+@media (prefers-reduced-motion:reduce){.breath{animation:none}.lcard{transition:none}}
+small{color:var(--muted);font-weight:600}.mu{color:var(--muted)}.ctr{text-align:center}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:14px 0}.tools label{font-weight:700;display:grid;gap:4px}
+.tools input{border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--bg2);color:var(--fg);font:16px var(--body)}
+.sheet{background:#fff;color:#14102a;border-radius:16px;padding:30px;max-width:780px;margin:16px auto;box-shadow:var(--shadow);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet header{border-bottom:3px solid #ff5c8a;padding-bottom:12px;margin-bottom:16px}.sheet header .px{font-size:10px;color:#e0245e}.sheet h2{font-size:28px;margin:6px 0 2px}.sheet h3{font-size:16px;margin:20px 0 8px}.sheet p{margin:0;color:#5b5788}
+.meta{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px;margin:14px 0 0}.meta div{display:flex;gap:8px}.meta dt{font-weight:700;min-width:84px}.meta dd{margin:0;border-bottom:1px dotted #5b5788;flex:1}
+.rt{width:100%;border-collapse:collapse}.rt th,.rt td{border:1px solid #d6d1f0;padding:7px 9px;text-align:left;font-size:14px}.rt th{background:#ebe8fb}
+.rfl{border-left:4px solid #35e0b4;background:#f5f3ff;padding:7px 12px;margin:6px 0;font-size:14px;border-radius:0 8px 8px 0}
+.sign{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:10px}.sign div{height:90px;border:1px solid #d6d1f0;border-radius:10px;padding:8px;font-size:13px;color:#5b5788}
+#rtxt{min-height:170px;font:13px/1.5 var(--mono)}
+@page{margin:14mm}
+@media print{body{background:#fff!important}.noprint{display:none!important}.wrap{padding:0}.sheet{box-shadow:none;border-radius:0;padding:0;margin:0;max-width:none}}
+</style></head>
+<body>
+<div id="app" v-cloak>
+<main class="wrap" v-if="!lv&&!isRes">
+  <nav class="brand"><span class="px">SPRINT SQUAD</span><span class="row"><span class="chip"><icon n="bolt"></icon> {{ total }} / 600 XP</span><a class="btn" href="#hasil"><icon n="doc"></icon> Lembar hasil</a></span></nav>
+  <section class="hero">
+    <div>
+      <span class="chip px">REKAYASA PERANGKAT LUNAK · KELAS X RPL</span>
+      <h1>Pahami klien. <em>Pilih metode.</em> <span>Kirim produk.</span></h1>
+      <p class="lead">Enam level belajar rekayasa perangkat lunak lewat gim, simulasi, dan debat. Mulai dari klien bawel sampai sprint kilat, semua jalan langsung di halaman ini.</p>
+      <div class="cta"><a class="btn pri" :href="'#lv'+next"><icon n="play"></icon> {{ clr||total ? 'Lanjut ke level '+next : 'Mulai level 1' }}</a><a class="btn" href="#peta">Lihat peta level</a></div>
+      <div class="stats"><span class="chip"><icon n="check"></icon> {{ clr }} / 6 level selesai</span><span class="chip"><icon n="medal"></icon> Peringkat: {{ rank }}</span></div>
+    </div>
+    <div class="pad"><div class="bar2"><i></i><i></i><i></i><span>sprint-board.log</span></div>
+<pre><span class="ask">&gt; klien:</span> “Ganti kotanya jadi taman, sekarang!”
+<span class="ans">&gt; analis:</span> dicatat, kita atur prioritasnya.
+<span class="ans">✓ sprint 1</span> selesai, demo ke klien.
+<span class="err">✗ bola jatuh</span> di zona Pengujian, ulang.
+<span class="wrn">! tips:</span> dengarkan dulu sampai selesai.</pre></div>
+  </section>
+  <section class="sec" id="peta">
+    <h2>Peta level</h2>
+    <p>Setiap level punya empat misi: Brief, Game, Kuis, dan Refleksi.</p>
+    <div class="map">
+      <a v-for="l in L" :key="l.id" :href="'#lv'+l.id" class="lcard" :style="{'--k':'var('+l.c+')'}">
+        <scene :n="l.id"></scene>
+        <span class="tag px">LV 0{{ l.id }}</span>
+        <h3>{{ l.n }}</h3><p class="sub">{{ l.t }}</p>
+        <div class="bar"><i :style="{width:xp(l)+'%'}"></i></div>
+        <div class="foot"><span class="st">{{ xp(l)>=100 ? 'Clear' : xp(l) ? 'Sedang berjalan' : 'Belum dimulai' }}</span><span>{{ xp(l) }} / 100 XP</span></div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<main class="wrap" v-else-if="lv" :style="{'--k':'var('+lv.c+')'}">
+  <a href="#" class="back"><icon n="back"></icon> Peta level</a>
+  <div class="top"><scene :n="lv.id"></scene><div><span class="tag px">LV 0{{ lv.id }}</span><h2>{{ lv.n }}</h2><small>{{ lv.t }} · {{ xp(lv) }} / 100 XP</small></div></div>
+  <div class="tabs"><button v-for="(t,i) in T" :key="i" :class="{on:tab===i}" @click="tab=i"><icon :n="TI[i]"></icon> {{ t }}</button></div>
+
+  <section class="panel" v-if="tab===0">
+    <h3>Brief misi</h3>
+    <ul class="br"><li v-for="b in lv.brief">{{ b }}</li></ul>
+    <p class="msg ok"><icon n="play"></icon> <span>Misi game: {{ lv.goal }}</span></p>
+    <button class="btn pri" style="margin-top:14px" @click="tab=1">Mulai game</button>
+  </section>
+
+  <section class="panel" v-if="tab===1">
+    <h3>{{ lv.goal }} <small v-if="S.g[lv.id]"><icon n="check"></icon> selesai +40 XP</small></h3>
+
+    <div v-if="lv.game==='sort'">
+      <div class="sticky" v-if="G.step<lv.items.length">Klien: “{{ lv.items[G.step][0] }}”</div>
+      <div class="row" v-if="G.step<lv.items.length"><button class="btn pri" @click="sortAns('F')">Fungsional (wajib ada)</button><button class="btn" @click="sortAns('N')">Non-fungsional (kualitas)</button></div>
+      <small>Kartu {{ Math.min(G.step+1,lv.items.length) }} / {{ lv.items.length }}</small>
+    </div>
+
+    <div v-if="lv.game==='order'">
+      <p class="mu">Ketuk fase sesuai urutan SDLC. Salah urutan = bola kertas jatuh!</p>
+      <div class="row"><button v-for="p in G.sh" :key="p" class="pc" :class="{used:lv.ph.indexOf(p)<G.e}" :disabled="lv.ph.indexOf(p)<G.e" @click="tapPh(p)">{{ p }}</button></div>
+      <small>Bola sudah melewati {{ G.e }} / 6 zona</small>
+    </div>
+
+    <div v-if="lv.game==='branch'">
+      <template v-if="G.step<lv.steps.length">
+        <div class="sticky">{{ lv.steps[G.step].q }}</div>
+        <button v-for="(o,i) in lv.steps[G.step].o" :key="i" class="btn opt" @click="pick(i)">{{ o }}</button>
+        <small>Tahap {{ G.step+1 }} / {{ lv.steps.length }}</small>
+      </template>
+    </div>
+
+    <div v-if="lv.game==='proto'">
+      <div class="sticky">Klien: “Aku mau aplikasi kantin sekolah yang gampang aja.”</div>
+      <p class="mu">Pilih 4 komponen yang benar-benar dibutuhkan untuk purwarupa pertama:</p>
+      <div class="row"><button v-for="(b,i) in lv.blocks" :key="i" class="pc" :class="{sel:G.sel[i]}" @click="G.sel[i]=!G.sel[i]">{{ b[0] }}</button></div>
+      <div class="phone"><div v-for="(b,i) in lv.blocks" v-show="G.sel[i]">{{ b[0] }}</div></div>
+      <button class="btn pri" @click="chkProto">Tunjukkan ke klien</button>
+    </div>
+
+    <div v-if="lv.game==='matrix'">
+      <p class="mu">Konteks: proyek yang kebutuhannya sering berubah. Ketuk sel untuk mengganti nilai.</p>
+      <div class="wr"><table>
+        <tr><th></th><th v-for="c in lv.cols">{{ c }}</th></tr>
+        <tr v-for="(r,ri) in lv.rows" :key="ri"><td class="r">{{ r }}</td>
+          <td v-for="(c,ci) in lv.cols" :key="ci"><button class="btn" :class="'cell'+G.mx[ri+'-'+ci]" @click="cyc(ri,ci)">{{ G.mx[ri+'-'+ci]===undefined?'?':lv.opts[ci][G.mx[ri+'-'+ci]] }}</button></td></tr>
+      </table></div>
+      <button class="btn pri" style="margin-top:10px" @click="chkMx">Cek matriks</button>
+    </div>
+
+    <p class="msg" :class="mok?'ok':'bad'" v-if="G.msg"><icon :n="mok?'check':'x'"></icon> <span>{{ mt }}</span></p>
+    <button class="btn" style="margin-top:12px" v-if="G.done" @click="tab=2">Lanjut ke kuis</button>
+    <button class="btn" style="margin-top:12px;margin-left:8px" v-if="G.done" @click="startG">Main lagi</button>
+  </section>
+
+  <section class="panel" v-if="tab===2">
+    <h3>Kuis kilat (+20 XP per jawaban benar)</h3>
+    <div v-for="(q,i) in lv.quiz" :key="i" style="margin-bottom:16px">
+      <b>{{ i+1 }}. {{ q.q }}</b>
+      <button v-for="(o,j) in q.o" :key="j" class="btn opt" :class="{ok:G.qp[i]===j&&j===q.a,no:G.qp[i]===j&&j!==q.a}" @click="ans(i,j)">{{ o }}</button>
+      <small v-if="S.q[lv.id+'-'+i]"><icon n="check"></icon> Benar</small>
+    </div>
+  </section>
+
+  <section class="panel ctr" v-if="tab===3">
+    <h3>Refleksi berkesadaran: {{ lv.rf[0] }}</h3>
+    <div class="breath"></div>
+    <p class="mu">Tarik napas 4 detik, hembuskan 4 detik. Ulangi tiga kali, lalu jawab pelan-pelan.</p>
+    <p><b>{{ lv.rf[1] }}</b></p>
+    <textarea v-model="G.txt" placeholder="Tulis jujur, ini hanya untukmu (min. 10 huruf)"></textarea>
+    <button class="btn pri" style="margin-top:10px" :disabled="G.txt.trim().length<10" @click="saveRf">Simpan refleksi (+20 XP)</button>
+    <p class="msg ok" v-if="S.r[lv.id]"><icon n="leaf"></icon> <span>Tersimpan. Refleksimu sudah dihitung.</span></p>
+  </section>
+</main>
+<main class="wrap" v-else-if="isRes">
+  <a href="#" class="back noprint"><icon n="back"></icon> Peta level</a>
+  <div class="tools noprint"><label>Nama siswa<input v-model="S.nm" @input="save" maxlength="40" placeholder="Tulis namamu"></label><button class="btn pri" @click="doPrint"><icon n="doc"></icon> Cetak / Simpan PDF</button><button class="btn" @click="doCopy"><icon n="copy"></icon> Salin teks</button></div>
+  <p class="msg noprint"><icon n="doc"></icon> <span>{{ pm||'Pilih Cetak, lalu pilih “Simpan sebagai PDF” sebagai printer. Jika dialog tidak muncul, buka tautan artifact di tab baru, atau salin teks di bawah ke dokumenmu.' }}</span></p>
+  <article class="sheet">
+    <header><span class="px">SPRINT SQUAD</span><h2>Lembar Hasil Belajar</h2><p>Rekayasa Perangkat Lunak · Kelas X RPL</p>
+      <dl class="meta"><div><dt>Nama</dt><dd>{{ S.nm||' ' }}</dd></div><div><dt>Tanggal</dt><dd>{{ today }}</dd></div><div><dt>Skor</dt><dd>{{ total }} / 600 XP</dd></div><div><dt>Peringkat</dt><dd>{{ rank }}</dd></div></dl></header>
+    <table class="rt"><thead><tr><th>Level</th><th>Game</th><th>Kuis</th><th>Refleksi</th><th>Total</th></tr></thead><tbody><tr v-for="r in rows" :key="r.id"><td>{{ r.id }}. {{ r.n }}</td><td>{{ r.g }}/40</td><td>{{ r.q }}/40</td><td>{{ r.r }}/20</td><td><b>{{ r.t }}/100</b></td></tr></tbody></table>
+    <h3>Catatan refleksi</h3>
+    <div class="rfl" v-for="r in rows" :key="'f'+r.id"><b>Level {{ r.id }}.</b> {{ r.rf||'(belum diisi)' }}</div>
+    <h3>Pengesahan</h3>
+    <div class="sign"><div>Siswa</div><div>Guru</div></div>
+  </article>
+  <h3 class="noprint">Teks untuk disalin</h3>
+  <textarea id="rtxt" class="noprint" readonly :value="report"></textarea>
+</main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.prod.js"></script>
+<script>
+const PH=['Perencanaan','Analisis','Desain','Implementasi','Pengujian','Pemeliharaan'];
+const L=[
+{id:1,e:'headset',c:'--pink',n:'Biro Jodoh Aplikasi',t:'Kebutuhan pelanggan',game:'sort',goal:'pilah kebutuhan klien bawel',
+ brief:['Kebutuhan fungsional adalah hal yang wajib bisa dilakukan aplikasi, misalnya login, memesan, dan membayar.','Kebutuhan non-fungsional adalah mutu kerja aplikasi: cepat, aman, dan enak dilihat.','Klien sering mengubah spesifikasi. Analis yang baik mendengar aktif: tidak memotong, lalu mengonfirmasi ulang.'],
+ items:[['Pengguna bisa memesan makanan','F'],['Halaman termuat kurang dari 2 detik','N'],['Admin bisa menambah menu baru','F'],['Tampilan harus aesthetic dan cerah','N'],['Sistem mencatat riwayat pembayaran','F'],['Data pengguna harus terenkripsi','N']],
+ quiz:[{q:'Mana kebutuhan non-fungsional?',o:['Login dengan email','Aplikasi harus aman dan cepat dibuka','Tombol bayar'],a:1},{q:'Klien mendadak mengubah spesifikasi. Sikap analis terbaik?',o:['Menyela dan membantah','Pura-pura paham','Mendengar sampai selesai, lalu konfirmasi ulang'],a:2}],
+ rf:['Mendengar aktif','Ingat satu momen saat kamu memotong ucapan orang. Apa yang mungkin terlewat?']},
+{id:2,e:'factory',c:'--mint',n:'Estafet Pabrik Aplikasi',t:'Pengantar SDLC',game:'order',goal:'estafet bola kertas lewat 6 fase',ph:PH,
+ brief:['SDLC adalah siklus hidup pengembangan perangkat lunak, dari ide sampai dirawat.','Enam fase: Perencanaan, Analisis, Desain, Implementasi, Pengujian, Pemeliharaan.','Jika bola jatuh di zona Pengujian, proyek diulang dari awal. Bug memang mahal!'],
+ quiz:[{q:'Urutan SDLC yang benar?',o:['Analisis, Perencanaan, Desain','Perencanaan, Analisis, Desain, Implementasi, Pengujian, Pemeliharaan','Desain, Implementasi, Analisis'],a:1},{q:'Fase yang menjaga aplikasi tetap hidup setelah rilis?',o:['Pemeliharaan','Perencanaan','Desain'],a:0}],
+ rf:['Fase pemeliharaan','Apa dalam hidupmu (persahabatan, kesehatan mental, belajar) yang butuh dirawat minggu ini?']},
+{id:3,e:'layers',c:'--sky',n:'Menara Kartu Waterfall',t:'Metode sekuensial',game:'branch',reset:1,goal:'susun menara tanpa boleh mundur',
+ brief:['Waterfall berjalan linear: satu fase selesai tuntas sebelum fase berikutnya.','Cocok untuk kebutuhan statis dan jelas sejak awal, misalnya sistem perbankan.','Kelemahan: sulit kembali ke tahap sebelumnya. Salah pilih, menara runtuh!'],
+ steps:[{q:'Fondasi menara. Apa yang dikerjakan lebih dulu?',o:['Langsung coding','Kumpulkan dan kunci kebutuhan','Pilih warna logo'],a:1,w:'Fondasi kuat.'},{q:'Kebutuhan sudah final. Tingkat berikutnya?',o:['Rancang desain sistem','Rilis ke publik','Ubah kebutuhan lagi'],a:0,w:'Desain naik.'},{q:'Desain disetujui. Lanjut ke…',o:['Pemeliharaan','Pengujian','Implementasi (coding)'],a:2,w:'Kode mulai berdiri.'},{q:'Kode jadi. Sebelum rilis?',o:['Pengujian menyeluruh','Langsung rilis','Ganti desain'],a:0,w:'Hampir di puncak.'},{q:'Mengapa bank besar memilih Waterfall?',o:['Karena paling cepat','Risiko gagal fatal harus ditekan, kebutuhan sudah jelas','Karena klien suka berubah'],a:1,w:'Menara berdiri!'}],
+ quiz:[{q:'Waterfall paling cocok untuk proyek…',o:['dengan kebutuhan berubah tiap hari','dengan kebutuhan statis dan jelas di awal','tanpa dokumentasi'],a:1},{q:'Kelemahan utama Waterfall?',o:['Terlalu fleksibel','Tidak punya tahapan','Sulit kembali ke tahap sebelumnya'],a:2}],
+ rf:['Komitmen','Keputusan apa yang sudah kamu ambil dan perlu kamu jalani dengan berani?']},
+{id:4,e:'rocket',c:'--sun',n:'Dapur Startup Kilat',t:'Metode Agile (Scrum)',game:'branch',goal:'bertahan di tiga sprint penuh perubahan',
+ brief:['Agile bekerja dalam sprint pendek, misalnya 5 menit di kelas atau 2 minggu di industri.','Setiap sprint diakhiri demo dan umpan balik dari pelanggan.','Perubahan permintaan disambut, bukan dimusuhi. Lepaskan ego pada rencana yang sudah basi.'],
+ steps:[{q:'Sprint 1. Klien berteriak: “Ganti kotanya jadi taman, sekarang!” Responsmu?',o:['Marah: “Kan sudah disepakati!”','Abaikan saja','Terima, diskusikan prioritas, lalu adaptasi'],a:2,w:'Lentur seperti air.'},{q:'Sprint selesai. Apa yang dilakukan?',o:['Demo ke klien dan minta umpan balik','Simpan dulu 6 bulan','Rilis tanpa dicoba'],a:0,w:'Umpan balik masuk.'},{q:'Rencana awalmu ditinggalkan dan kamu kesal. Sikap terbaik?',o:['Salahkan klien','Lepaskan ego, fokus pada nilai bagi pengguna','Mogok kerja'],a:1,w:'Sprint selesai, tim kompak!'}],
+ quiz:[{q:'Siklus kerja pendek di Scrum disebut…',o:['Sprint','Milestone','Arsip'],a:0},{q:'Kekuatan utama Agile?',o:['Tidak butuh pelanggan','Umpan balik rutin dari pelanggan','Rencana tidak pernah berubah'],a:1}],
+ rf:['Regulasi emosi','Kapan terakhir rencanamu berubah mendadak? Apa yang bisa kamu lepaskan?']},
+{id:5,e:'scissors',c:'--violet',n:'Seniman Kardus',t:'Metode Prototyping',game:'proto',goal:'rancang purwarupa kertas yang tepat sasaran',
+ blocks:[['Daftar menu',1],['Keranjang pesanan',1],['Tombol bayar',1],['Status pesanan',1],['Animasi 3D rumit',0],['Fitur ngobrol AI',0],['Game mini',0]],
+ brief:['Prototyping membuat purwarupa visual cepat untuk memvalidasi kebutuhan yang masih buram.','Cukup kertas, spidol, dan gunting. Maket kasar bisa menghemat berbulan-bulan salah coding.','Latihan melepaskan kesempurnaan: purwarupamu boleh dicoret klien tanpa perlu baper.'],
+ quiz:[{q:'Tujuan utama prototyping?',o:['Menggantikan coding selamanya','Memvalidasi kebutuhan yang belum pasti dengan cepat','Menghias aplikasi'],a:1},{q:'Prototipemu dicoret klien. Reaksi tepat?',o:['Baper dan mogok','Sembunyikan prototipe','Anggap itu data berharga untuk revisi'],a:2}],
+ rf:['Melepaskan kesempurnaan','Karya apa yang kamu tahan karena takut belum sempurna?']},
+{id:6,e:'mic',c:'--orange',n:'Debat Kandidat Metodologi',t:'Kerangka komparasi',game:'matrix',goal:'susun matriks perbandingan tiga metode',
+ rows:['Waterfall','Agile','Prototyping'],cols:['Waktu','Fleksibilitas','Risiko gagal'],opts:[['Cepat','Sedang','Lama'],['Rendah','Sedang','Tinggi'],['Rendah','Sedang','Tinggi']],key:[[2,0,2],[1,2,0],[0,1,1]],
+ brief:['Tidak ada metodologi ajaib. Engineer memilih alat yang tepat untuk konteks proyek.','Bandingkan lewat tiga indikator: waktu, fleksibilitas, dan risiko gagal.','Bela metodemu dengan data, lalu duduk melingkar dan hargai perbedaan.'],
+ quiz:[{q:'Sistem inti bank dengan kebutuhan jelas cocok memakai…',o:['Prototyping saja','Tanpa metode','Waterfall'],a:2},{q:'Startup dengan pasar yang cepat berubah cocok memakai…',o:['Waterfall kaku','Agile','Tidak perlu rencana'],a:1}],
+ rf:['Kebijaksanaan','Tuliskan satu perbedaan pendapat dengan temanmu yang ternyata bermanfaat.']}
+];
+const T=['Brief','Game','Kuis','Refleksi'],TI=['book','play','quiz','leaf'];
+const P={doc:'M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6',copy:'M8 8h11v13H8zM5 16V3h11',bolt:'M13 2L4 14h7l-1 8 9-12h-7z',check:'M5 13l4 4L19 7',x:'M6 6l12 12M18 6L6 18',back:'M15 5l-7 7 7 7',play:'M7 4l13 8-13 8z',medal:'M12 15a6 6 0 100-12 6 6 0 000 12zM8.5 14L7 22l5-3 5 3-1.5-8',leaf:'M5 19c0-9 6-14 15-14 0 9-5 15-14 15M5 19l8-8',headset:'M4 14v-2a8 8 0 0116 0v2M4 14h3v5H4zM17 14h3v5h-3z',factory:'M3 21V9l6 4V9l6 4V5h6v16z',layers:'M12 3l9 5-9 5-9-5zM3 13l9 5 9-5',rocket:'M12 3c4 2 6 6 5 11l-3 3h-4l-3-3c-1-5 1-9 5-11zM9 18l-3 3M15 18l3 3',scissors:'M6 8a3 3 0 100-6 3 3 0 000 6zM6 22a3 3 0 100-6 3 3 0 000 6zM8 7l12 12M8 17L20 5',mic:'M12 3a3 3 0 013 3v5a3 3 0 01-6 0V6a3 3 0 013-3zM5 11a7 7 0 0014 0M12 18v3',book:'M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM4 19a2 2 0 012-2h13',quiz:'M12 21a9 9 0 100-18 9 9 0 000 18zM9.5 9.5a2.5 2.5 0 115 0c0 2-2.5 2-2.5 4M12 17h.01'};
+const app=Vue.createApp({setup(){
+ const{ref,reactive,computed}=Vue;
+ const S=reactive({g:{},q:{},r:{}});
+ try{Object.assign(S,JSON.parse(localStorage.getItem('sprintsquad')||'{}'))}catch(e){}
+ const save=()=>{try{localStorage.setItem('sprintsquad',JSON.stringify(S))}catch(e){}};
+ const hash=ref(location.hash.slice(1)),tab=ref(0);
+ const G=reactive({step:0,msg:'',e:0,done:false,sel:{},mx:{},sh:[],qp:{},txt:''});
+ const lv=computed(()=>L.find(l=>'lv'+l.id===hash.value)||null);
+ const xp=l=>(S.g[l.id]?40:0)+l.quiz.reduce((s,_,i)=>s+(S.q[l.id+'-'+i]?20:0),0)+(S.r[l.id]?20:0);
+ const total=computed(()=>L.reduce((s,l)=>s+xp(l),0));
+ const clr=computed(()=>L.filter(l=>xp(l)>=100).length);
+ const rank=computed(()=>{const t=total.value;return t>=600?'CTO':t>=450?'Tech Lead':t>=300?'Scrum Master':t>=150?'Junior Analyst':'Magang'});
+ function startG(){const l=lv.value;if(!l)return;Object.assign(G,{step:0,msg:'',e:0,done:false,sel:{},mx:{},qp:{},txt:S.r[l.id]||'',sh:l.ph?[...l.ph].sort(()=>Math.random()-.5):[]})}
+ addEventListener('hashchange',()=>{hash.value=location.hash.slice(1);tab.value=0;startG();scrollTo(0,0)});
+ startG();
+ const win=m=>{S.g[lv.value.id]=1;save();G.done=true;G.msg=m};
+ const sortAns=a=>{const it=lv.value.items[G.step];if(a===it[1]){G.step++;G.msg='✅ Tepat! '+(a==='F'?'Itu fungsi yang wajib ada.':'Itu soal mutu, bukan fungsi.');if(G.step>=lv.value.items.length)win('🎉 Semua kebutuhan terpilah. Analis handal!')}else G.msg='❌ Hmm, tanya dirimu: apakah ini “apa yang dilakukan” atau “seberapa baik”?'};
+ const tapPh=p=>{const ph=lv.value.ph;if(p===ph[G.e]){G.e++;G.msg='⚽ Aman melewati zona '+p+'!';if(G.e===6)win('🎉 Proyek sampai ke Pemeliharaan. Siklus lengkap!')}else{G.msg='💥 Bola jatuh! '+p+' belum gilirannya.';if(ph[G.e]==='Pengujian'){G.e=0;G.msg+=' Jatuh di zona Pengujian, ulang dari awal!'}}};
+ const pick=i=>{const l=lv.value,s=l.steps[G.step];if(i===s.a){G.step++;G.msg='✅ '+s.w;if(G.step>=l.steps.length)win('🎉 '+s.w+' Misi selesai!')}else if(l.reset){G.step=0;G.msg='💥 Menara runtuh! Kamu tidak bisa mundur, mulai lagi dari fondasi.'}else G.msg='❌ Kurang pas. Ingat: Agile menyambut perubahan dan umpan balik.'};
+ const chkProto=()=>{const bl=lv.value.blocks;let miss=[],extra=[];bl.forEach((b,i)=>{if(b[1]&&!G.sel[i])miss.push(b[0]);if(!b[1]&&G.sel[i])extra.push(b[0])});if(!miss.length&&!extra.length)win('🎉 Klien mencoret desain 3D-mu, tapi inti purwarupa sudah tepat. Dicoret itu normal!');else G.msg='✏️ Klien mencoret: '+(extra.length?'terlalu berlebihan ('+extra.join(', ')+'). ':'')+(miss.length?'Belum ada: '+miss.join(', ')+'.':'')+' Revisi dan tunjukkan lagi!'};
+ const cyc=(r,c)=>{const k=r+'-'+c;G.mx[k]=G.mx[k]===undefined?0:(G.mx[k]+1)%3};
+ const chkMx=()=>{const l=lv.value;let bad=0;l.rows.forEach((_,r)=>l.cols.forEach((_,c)=>{if(G.mx[r+'-'+c]!==l.key[r][c])bad++}));if(!bad)win('🎉 Matriks benar! Waterfall lama dan kaku, Agile lentur dengan umpan balik rutin, Prototyping cepat memvalidasi kebutuhan.');else G.msg='🤔 '+bad+' dari 9 sel masih kurang pas. Pikirkan proyek yang kebutuhannya sering berubah.'};
+ const ans=(i,j)=>{G.qp[i]=j;if(lv.value.quiz[i].a===j){S.q[lv.value.id+'-'+i]=1;save()}};
+ const saveRf=()=>{S.r[lv.value.id]=G.txt.trim();save()};
+ const isRes=computed(()=>hash.value==='hasil'),today=new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}),pm=ref(''),rows=computed(()=>L.map(l=>({id:l.id,n:l.n,g:S.g[l.id]?40:0,q:l.quiz.reduce((s,_,i)=>s+(S.q[l.id+'-'+i]?20:0),0),r:S.r[l.id]?20:0,t:xp(l),rf:S.r[l.id]||''}))),report=computed(()=>['LEMBAR HASIL - SPRINT SQUAD','Nama: '+(S.nm||'-'),'Tanggal: '+today,'Total: '+total.value+' / 600 XP ('+rank.value+')',''].concat(rows.value.map(r=>'Level '+r.id+' '+r.n+': '+r.t+'/100 (Game '+r.g+', Kuis '+r.q+', Refleksi '+r.r+')'),['','Catatan refleksi:'],rows.value.filter(r=>r.rf).map(r=>'Level '+r.id+': '+r.rf)).join('\n')),doPrint=()=>{try{window.print()}catch(e){pm.value='Dialog cetak diblokir. Buka tautan artifact di tab baru, lalu coba lagi.'}},doCopy=async()=>{try{await navigator.clipboard.writeText(report.value);pm.value='Teks hasil sudah disalin.'}catch(e){const t=document.getElementById('rtxt');t.select();try{document.execCommand('copy');pm.value='Teks hasil sudah disalin.'}catch(_){pm.value='Teks sudah terpilih, tekan Ctrl+C untuk menyalin.'}}},next=computed(()=>{const l=L.find(l=>xp(l)<100);return l?l.id:6}),mok=computed(()=>/^(✅|🎉|⚽)/.test(G.msg)),mt=computed(()=>G.msg.replace(/^\S+\s/,''));
+ return{isRes,today,pm,rows,report,doPrint,doCopy,save,TI,next,mok,mt,L,T,S,G,lv,tab,xp,total,clr,rank,startG,sortAns,tapPh,pick,chkProto,cyc,chkMx,ans,saveRf}
+}});
+app.component('icon',{props:['n'],setup:()=>({P}),template:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path :d="P[n]"/></svg>'});
+app.component('scene',{props:['n'],template:`<svg class="scene" viewBox="0 0 320 140" role="img" :aria-label="'Ilustrasi level '+n"><rect class="s-bg" width="320" height="140" rx="12"/>
+<g v-if="n===1"><circle class="s-l s-p" cx="62" cy="52" r="16"/><rect class="s-l s-p" x="42" y="74" width="40" height="46" rx="12"/><rect class="s-l s-f" x="100" y="14" width="140" height="48" rx="12"/><path class="s-l" d="M100 50l-12 14 22-6M116 30h90M116 44h60"/><circle class="s-l s-g" cx="262" cy="78" r="16"/><rect class="s-l s-g" x="242" y="100" width="40" height="28" rx="12"/><rect class="s-l s-s" x="150" y="84" width="38" height="24" rx="6"/><rect class="s-l s-v" x="196" y="84" width="38" height="24" rx="6"/></g>
+<g v-if="n===2"><rect class="s-l s-f" x="14" y="98" width="292" height="16" rx="8"/><rect v-for="i in 6" :key="i" class="s-l s-k" :x="20+(i-1)*47" y="62" width="34" height="30" rx="6"/><circle class="s-l s-s" cx="40" cy="36" r="12"/><path class="s-l" d="M60 36h200m0 0l-8-8m8 8l-8 8"/></g>
+<g v-if="n===3"><rect v-for="i in 4" :key="i" class="s-l s-k" :x="70+(i-1)*25" :y="108-(i-1)*28" :width="180-(i-1)*50" height="24" rx="4"/><path class="s-l" d="M290 18v104m0 0l-8-9m8 9l8-9"/></g>
+<g v-if="n===4"><path class="s-l s-k" d="M160 12c26 18 34 48 26 78h-52c-8-30 0-60 26-78z"/><circle class="s-l s-v" cx="160" cy="48" r="10"/><path class="s-l s-s" d="M146 92l14 32 14-32z"/><circle v-for="i in 3" :key="i" class="s-l s-g" :cx="20+i*34" cy="112" r="11"/><circle v-for="i in 3" :key="'b'+i" class="s-l s-p" :cx="196+i*34" cy="112" r="11"/></g>
+<g v-if="n===5"><rect class="s-l s-f" x="120" y="10" width="80" height="120" rx="14"/><rect v-for="i in 3" :key="i" class="s-l s-k" x="130" :y="22+(i-1)*32" width="60" height="22" rx="5"/><path class="s-l" style="stroke:var(--pink)" d="M126 78l68 12"/><path class="s-l" d="M226 40l50 50M226 90l50-50"/><circle class="s-l s-f" cx="222" cy="36" r="7"/><circle class="s-l s-f" cx="222" cy="94" r="7"/></g>
+<g v-if="n===6"><rect v-for="i in 9" :key="i" class="s-l" :class="['s-g','s-s','s-p'][(i+Math.floor(i/3))%3]" :x="92+((i-1)%3)*46" :y="14+Math.floor((i-1)/3)*38" width="40" height="32" rx="6"/><path class="s-l" d="M40 30h36M40 68h36M40 106h36M244 30h36M244 68h36M244 106h36"/></g></svg>`});
+app.mount('#app');
+</script>
+</body></html>
